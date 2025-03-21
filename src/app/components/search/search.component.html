@@ -1,0 +1,42 @@
+<div class="search-container">
+<div class="search-header">
+    <h2>Search Services</h2>
+    <div class="search-box">
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Search for services...">
+    <button (click)="search()">Search</button>
+    </div>
+    <div class="filters">
+    <select [(ngModel)]="selectedCategory">
+        <option value="">All Categories</option>
+        <option value="cleaning">Cleaning</option>
+        <option value="gardening">Gardening</option>
+        <option value="tutoring">Tutoring</option>
+        <option value="maintenance">Maintenance</option>
+    </select>
+    <select [(ngModel)]="selectedSalary">
+        <option value=0>All Salaries</option>
+        <option value=10>+10$/hour</option>
+        <option value=12>+12$/hour</option>
+        <option value=14>+14$/hour</option>
+        <option value=16>+16$/hour</option>
+    </select>
+    <select [(ngModel)]="selectedLocation">
+        <option value="">All Locations</option>
+        <option value="new-york">New York</option>
+        <option value="los-angeles">Los Angeles</option>
+        <option value="chicago">Chicago</option>
+    </select>
+    </div>
+</div> 
+<div class="search-results">
+    <p *ngIf="!searchResults.length">No services found. Try adjusting your search criteria.</p>
+    <div class="service-card" *ngFor="let service of searchResults">
+    <h3>{{service.title}}</h3>
+    <p>{{service.description}}</p>
+    <div class="service-footer">
+        <span>{{service.salary}}</span>
+        <button>Contact Provider</button>
+    </div>
+    </div>
+</div>
+</div>
