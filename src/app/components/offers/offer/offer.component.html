@@ -1,0 +1,26 @@
+<h2>{{ isEditMode ? 'Actualizar Oferta' : 'Crear Nueva Oferta' }}</h2>
+
+<form (ngSubmit)="submitForm()">
+  <label>Title:</label>
+  <input type="text" [(ngModel)]="offer.title" name="title" required />
+
+  <label>Additional info:</label>
+  <textarea [(ngModel)]="offer.additional_info" name="additional_info"></textarea>
+
+  <label>Category:</label>
+  <input type="text" [(ngModel)]="offer.category" name="category" />
+
+  <label>Price:</label>
+  <input type="number" [(ngModel)]="offer.price" name="price" />
+
+  <label>Timetable:</label>
+  <input type="text" [(ngModel)]="offer.timetable" name="timetable" />
+
+  <label>Address:</label>
+  <input type="text" [(ngModel)]="offer.address" name="address" />
+
+  <label>Tags:</label>
+  <input type="text" [(ngModel)]="offer.tags" name="tags" />
+
+  <button type="submit">{{ isEditMode ? 'Actualizar' : 'Crear' }}</button>
+</form>

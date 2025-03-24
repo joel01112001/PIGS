@@ -26,6 +26,9 @@ export class OffersService {
 
     return this.http.get<Offer[]>(this.apiUrl, { params });
   }
+  getOffer(id: number): Observable<Offer> {
+    return this.http.get<Offer>(`${this.apiUrl}/${id}`);
+  }
 
   createOffer(offer: Offer): Observable<Offer> {
     return this.http.post<Offer>(this.apiUrl, offer);
@@ -34,7 +37,7 @@ export class OffersService {
     return this.http.put<Offer>(this.apiUrl, offer);
   }
   deleteOffer(id: number): Observable<Offer>{
-    return this.http.delete<Offer>(this.apiUrl);
+    return this.http.delete<any>(this.apiUrl + '/' + id);
   }
   getCategories(): Observable<string[]> {
     return this.http.get<string[]>(`${this.apiBaseUrl}/categories`);

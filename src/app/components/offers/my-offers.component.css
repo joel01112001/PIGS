@@ -1,0 +1,66 @@
+.offers-container {
+max-width: 1000px;
+margin: 2rem auto;
+padding: 0 1rem;
+}
+.offers-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 2rem;
+}
+.new-offer-btn {
+padding: 0.5rem 1rem;
+background-color: #28a745;
+color: white;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+.offer-card {
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 1rem;
+margin-bottom: 1rem;
+}
+.offer-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.status {
+padding: 0.25rem 0.5rem;
+border-radius: 4px;
+font-size: 0.9rem;
+}
+.status.active {
+background-color: #28a745;
+color: white;
+}
+.status.inactive {
+    background-color: #bb1611;
+    color: white;
+}
+.offer-details {
+display: flex;
+gap: 2rem;
+margin: 1rem 0;
+}
+.offer-actions {
+display: flex;
+gap: 1rem;
+}
+.edit-btn, .delete-btn {
+padding: 0.5rem 1rem;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+.edit-btn {
+background-color: #007bff;
+color: white;
+}
+.delete-btn {
+background-color: #dc3545;
+color: white;
+}

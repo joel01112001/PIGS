@@ -1,7 +1,7 @@
 export interface Offer {
   id?: number | null;
-  employee?: string | null;
-  employer?: string | null;
+  employee?: number | null;
+  employer?: number | null;
   title?: string | null;
   additional_info?: string | null;
   category?: string | null;

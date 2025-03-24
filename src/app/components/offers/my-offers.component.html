@@ -1,0 +1,25 @@
+<div class="offers-container">
+<div class="offers-header">
+    <h2>My Offers</h2>
+    <button class="new-offer-btn" (click)="create()">Create New Offer</button>
+</div>
+<div class="offers-list">
+    <div class="offer-card" *ngFor="let offer of myOffers">
+    <div class="offer-header">
+        <h3>{{offer.title}}</h3>
+        <span class="status" [class.active]="!offer.employee" [class.inactive]="offer.employee">
+        {{!offer.employee ? 'Active' : 'Occupied'}}
+        </span>
+    </div>
+    <p>{{offer.additional_info}}</p>
+    <div class="offer-details">
+        <span>Price: {{offer.price}}</span>
+        <span>Category: {{offer.category}}</span>
+    </div>
+    <div class="offer-actions">
+        <button class="edit-btn" (click)="edit(offer)">Edit</button>
+        <button class="delete-btn" (click)="eliminate(offer.id)">Delete</button>
+    </div>
+    </div>
+</div>
+</div>
