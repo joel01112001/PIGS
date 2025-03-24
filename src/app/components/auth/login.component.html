@@ -1,15 +1,20 @@
 <div class="auth-container">
-  <h2>Iniciar Sesión</h2>
+  <h2>Login</h2>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="email">Correo electrónico</label>
-      <input type="email" id="email" formControlName="email" placeholder="Ingresa tu correo" />
+      <label for="email">Mail</label>
+      <input type="email" id="email" formControlName="email" placeholder="Type your mail" />
     </div>
     <div class="form-group">
-      <label for="password">Contraseña</label>
-      <input type="password" id="password" formControlName="password" placeholder="Ingresa tu contraseña" />
+      <label for="password">Password</label>
+      <input type="password" id="password" formControlName="password" placeholder="Type your password" />
     </div>
-    <button type="submit" [disabled]="loginForm.invalid">Iniciar sesión</button>
+    <button type="submit" [disabled]="loginForm.invalid">Go</button>
+    
+    <!-- Mostrar mensaje de error si existe -->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
   </form>
 
   <p>Don't have an account? <a href="javascript:void(0);" (click)="goToRegister()">Register here</a></p>
