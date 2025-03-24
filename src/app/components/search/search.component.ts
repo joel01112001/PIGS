@@ -13,15 +13,22 @@ import { OffersService } from '../../services/offers.service';
   templateUrl: "./search.component.html",
   styleUrl: "./search.component.css"
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit{
   constructor(protected offersService: OffersService) {}
   searchQuery = '';
   selectedCategory = '';
   selectedTags = '';
   searchResults: Offer[] = [];
   selectedSalary: number = 0;
+  categories: string[] = [];
+  tags: string[] = [];
+  prices: number[] = [];
 
-
+  ngOnInit(): void {
+    this.offersService.getCategories().subscribe((categories) => {this.categories = categories});
+    this.offersService.getTags().subscribe((tags) => {this.tags = tags});
+    this.offersService.getPrices().subscribe((prices) => {this.prices = prices});
+  }
 
   search() {
     this.offersService.getOffers(

@@ -8,23 +8,21 @@
     <div class="filters">
     <select [(ngModel)]="selectedCategory">
         <option value="">All Categories</option>
-        <option value="Cleaning">Cleaning</option>
-        <option value="Gardening">Gardening</option>
-        <option value="Tutoring">Tutoring</option>
-        <option value="Pet care">Pet care</option>
-        <option value="Maintenance">Maintenance</option>
+        <option *ngFor="let category of categories" [value]=category>
+            {{ category }}
+        </option>
     </select>
     <select [(ngModel)]="selectedSalary">
-        <option value="">All Salaries</option>
-        <option value=10>+10$/hour</option>
-        <option value=12>+12$/hour</option>
-        <option value=14>+14$/hour</option>
-        <option value=16>+16$/hour</option>
+        <option value="">All salaries</option>
+        <option *ngFor="let price of prices" [value]=price>
+            {{ price }}
+        </option>
     </select>
     <select [(ngModel)]="selectedTags">
         <option value="">All Tags</option>
-        <option value="Exotic animal">Exotic animal</option>
-        <option value="Difficult plantcare">Difficult plantcare</option>
+        <option *ngFor="let tag of tags" [value]=tag>
+            {{ tag }}
+        </option>
     </select>
     </div>
 </div> 

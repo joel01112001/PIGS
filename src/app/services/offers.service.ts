@@ -9,6 +9,7 @@ import {Offer} from "../interfaces/Offer";
 })
 export class OffersService {
   private apiUrl = "http://localhost:8000/offers";
+  private apiBaseUrl = "http://localhost:8000";
 
 
   constructor(private http: HttpClient) {}
@@ -29,7 +30,19 @@ export class OffersService {
   createOffer(offer: Offer): Observable<Offer> {
     return this.http.post<Offer>(this.apiUrl, offer);
   }
+  updateOffer(offer: Offer): Observable<Offer> {
+    return this.http.put<Offer>(this.apiUrl, offer);
+  }
   deleteOffer(id: number): Observable<Offer>{
     return this.http.delete<Offer>(this.apiUrl);
+  }
+  getCategories(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiBaseUrl}/categories`);
+  }
+  getTags(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiBaseUrl}/tags`);
+  }
+  getPrices(): Observable<number[]> {
+    return this.http.get<number[]>(`${this.apiBaseUrl}/prices`);
   }
 }
