@@ -17,14 +17,16 @@ export class SearchComponent {
   constructor(protected offersService: OffersService) {}
   searchQuery = '';
   selectedCategory = '';
-  selectedLocation = '';
+  selectedTags = '';
   searchResults: Offer[] = [];
   selectedSalary: number = 0;
 
 
 
   search() {
-    this.offersService.getOffers({}).subscribe((offers) => {this.searchResults = offers});
+    this.offersService.getOffers(
+      {"category": this.selectedCategory, "tags": this.selectedTags, "price": this.selectedSalary, "title": this.searchQuery}
+    ).subscribe((offers) => {this.searchResults = offers});
     console.log(this.searchResults)
   }
 }

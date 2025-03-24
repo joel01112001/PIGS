@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Offer} from "../interfaces/Offer";
 
@@ -14,7 +14,16 @@ export class OffersService {
   constructor(private http: HttpClient) {}
 
   getOffers(filters: Offer): Observable<Offer[]> {
-    return this.http.get<Offer[]>(this.apiUrl);
+    let params = new HttpParams();
+
+    // Recorremos cada clave del objeto filters y la agregamos a los parámetros si tiene valor
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value !== null && value !== undefined && value !== '') {
+        params = params.set(key, value.toString());
+      }
+    });
+
+    return this.http.get<Offer[]>(this.apiUrl, { params });
   }
 
   createOffer(offer: Offer): Observable<Offer> {
