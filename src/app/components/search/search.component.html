@@ -30,7 +30,11 @@
     <p *ngIf="!searchResults.length">No services found. Try adjusting your search criteria.</p>
     <div class="service-card" *ngFor="let offer of searchResults">
     <h3>{{offer.title}}</h3>
-    <p>{{offer.additional_info}}</p>
+    <p> Category: {{offer.category}}</p>
+    <p>Additional info: {{offer.additional_info}}</p>
+    <p>Tags: {{offer.tags}}</p>
+    <p>Timetable: {{offer.timetable}}</p>
+    <p>Address: {{offer.address}}</p>
     <div class="service-footer">
         <span>{{offer.price}}</span>
         <button>Contact Provider</button>
