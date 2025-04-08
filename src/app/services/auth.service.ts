@@ -3,6 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { sha256 } from 'js-sha256';
 
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
 
 interface RegisterData {
   name: string;
@@ -25,6 +30,8 @@ interface AuthResponse {
 export class AuthService {
   private apiUrl = 'http://localhost:8000/users';
   private authUrl = 'http://localhost:8000/users/authenticate';
+  private USER_KEY = 'loggedInUser';
+
 
   constructor(private http: HttpClient) {}
 
@@ -37,5 +44,8 @@ export class AuthService {
   authenticate(credentials: LoginData): Observable<AuthResponse> {
     credentials.password = sha256(credentials.password); // Encriptar la contraseña
     return this.http.post<AuthResponse>(this.authUrl, credentials);
+  }
+  saveUserToLocalStorage(user: User) {
+    localStorage.setItem(this.USER_KEY, JSON.stringify(user));
   }
 }

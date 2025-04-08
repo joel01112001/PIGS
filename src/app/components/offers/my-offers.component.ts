@@ -14,7 +14,7 @@ import { OffersService } from '../../services/offers.service';
 })
 export class MyOffersComponent implements OnInit{
   myOffers: Offer[] = [];
-  user = 13;
+  user = JSON.parse(localStorage.getItem('loggedInUser') || '{}').id;
   constructor(protected offersService: OffersService, private router: Router) {}
 
   
