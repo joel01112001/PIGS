@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { sha256 } from 'js-sha256';
+
 
 interface RegisterData {
   name: string;
@@ -27,11 +29,13 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   register(user: RegisterData): Observable<any> {
+    user.password = sha256(user.password); // Encriptar la contraseña
     return this.http.post<any>(this.apiUrl, user);
   }
 
   // Nuevo método de autenticación
   authenticate(credentials: LoginData): Observable<AuthResponse> {
+    credentials.password = sha256(credentials.password); // Encriptar la contraseña
     return this.http.post<AuthResponse>(this.authUrl, credentials);
   }
 }

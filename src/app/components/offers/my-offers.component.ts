@@ -14,7 +14,7 @@ import { OffersService } from '../../services/offers.service';
 })
 export class MyOffersComponent implements OnInit{
   myOffers: Offer[] = [];
-  user = 10;
+  user = 13;
   constructor(protected offersService: OffersService, private router: Router) {}
 
   
