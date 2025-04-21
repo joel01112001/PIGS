@@ -25,13 +25,13 @@ export class MyOffersComponent implements OnInit{
   }
 
   edit(offer: Offer): void {
-    this.router.navigate(['/offer', true, offer.id]);
+    this.router.navigate(['/offer', "true", offer.id]);
   }
   create(): void {
-    this.router.navigate(['/offer', false, ""]);
+    this.router.navigate(['/offer', "false", ""]);
   }
   eliminate(offerId: any): void {
-    this.offersService.deleteOffer(offerId).subscribe(() => {});
+    this.offersService.deleteOffer(offerId).subscribe(() => {window.location.reload();});
   }
   
 }

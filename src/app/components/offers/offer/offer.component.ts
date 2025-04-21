@@ -2,7 +2,7 @@ import { Offer } from '../../../interfaces/Offer';
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {NgClass, NgForOf, NgIf, NgStyle, NgSwitch, NgSwitchCase, NgFor} from "@angular/common";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { OffersService } from '../../../services/offers.service';
 import { AuthService } from '../../../services/auth.service';
 
@@ -24,11 +24,13 @@ export class OfferComponent implements OnInit{
     address: '',
     category: ''
   };
-  constructor(protected offersService: OffersService, protected authService: AuthService,private router: Router) {}
+  constructor(protected offersService: OffersService, protected authService: AuthService,private router: Router, private route:ActivatedRoute) {}
   categories: string[] = [];
   tags: string[] = [];
   prices: number[] = [];
   ngOnInit(): void {
+    this.isEditMode = this.route.snapshot.paramMap.get('mode') === 'true';
+    this.offerId = Number(this.route.snapshot.paramMap.get('id'));
     if (this.isEditMode) {
       this.offersService.getOffer(this.offerId!).subscribe((offer) => this.offer = offer);
     }
@@ -43,7 +45,7 @@ export class OfferComponent implements OnInit{
     this.offersService.getPrices().subscribe((prices) => {
       this.prices = prices;
     });
-    this.offer.employer = this.authService.getUserIdFromLocalStorage(); // Asignar el ID del usuario autenticado a la oferta
+    this.offer.employer = 12;//this.authService.getUserIdFromLocalStorage(); // Asignar el ID del usuario autenticado a la oferta
   }
   submitForm() {
     if (this.isEditMode) {
