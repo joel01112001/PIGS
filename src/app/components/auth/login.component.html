@@ -1,21 +1,63 @@
-<div class="auth-container">
-  <h2>Login</h2>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="email">Mail</label>
-      <input type="email" id="email" formControlName="email" placeholder="Type your mail" />
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" id="password" formControlName="password" placeholder="Type your password" />
-    </div>
-    <button type="submit" [disabled]="loginForm.invalid">Go</button>
-    
-    <!-- Mostrar mensaje de error si existe -->
-    <div *ngIf="errorMessage" class="error-message">
-      {{ errorMessage }}
-    </div>
-  </form>
-
-  <p>Don't have an account? <a href="javascript:void(0);" (click)="goToRegister()">Register here</a></p>
+<div class="auth-wrapper">
+  <div class="auth-container">
+    <h2>Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Mail</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="Type your mail"
+        />
+        <div
+          class="field-error"
+          *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)"
+        >
+          <small *ngIf="loginForm.get('email')?.errors?.['required']">
+            Email is mandatory
+          </small>
+          <small *ngIf="loginForm.get('email')?.errors?.['email']">
+            Email format is not valid
+          </small>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="Type your password"
+        />
+        <div
+          class="field-error"
+          *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)"
+        >
+          <small *ngIf="loginForm.get('password')?.errors?.['required']">
+            Password is mandatory
+          </small>
+          <small *ngIf="loginForm.get('password')?.errors?.['minlength']">
+            Password must be at least {{ loginForm.get('password')?.errors?.['minlength']?.requiredLength }} characters long
+          </small>        
+        </div>
+      </div>
+  
+      <button type="submit" [disabled]="loginForm.invalid || isLoading">
+        {{ isLoading ? 'Loading...' : 'Confirm' }}
+      </button>
+  
+      <!-- Mensaje de error general -->
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+    </form>
+  
+    <p>
+      Don't have an account?
+      <a href="javascript:void(0);" (click)="goToRegister()">Register here</a>
+    </p>
+  </div>
 </div>
+
