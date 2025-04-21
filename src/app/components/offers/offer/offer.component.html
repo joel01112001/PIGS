@@ -1,9 +1,12 @@
 <h2>{{ isEditMode ? 'Actualizar Oferta' : 'Crear Nueva Oferta' }}</h2>
 
-<form (ngSubmit)="submitForm()">
+<form #offerForm="ngForm" (ngSubmit)="submitForm()">
   <div>
     <label>Title:</label>
     <input type="text" [(ngModel)]="offer.title" name="title" required />
+    <div *ngIf="offerForm.submitted && !offerForm.controls['title']?.valid" class="error">
+      El título es obligatorio.
+    </div>
   </div>
 
   <div>
@@ -13,36 +16,55 @@
 
   <div>
     <label>Category:</label>
-    <select [(ngModel)]="offer.category" name="category">
+    <select [(ngModel)]="offer.category" name="category" required>
       <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
     </select>
+    <div *ngIf="offerForm.submitted && !offerForm.controls['category']?.valid" class="error">
+      La categoría es obligatoria.
+    </div>
   </div>
 
   <div>
     <label>Price:</label>
-    <select [(ngModel)]="offer.price" name="price">
+    <select [(ngModel)]="offer.price" name="price" required>
       <option *ngFor="let price of prices" [value]="price">{{ price }}</option>
     </select>
   </div>
 
   <div>
     <label>Timetable:</label>
-    <input type="text" [(ngModel)]="offer.timetable" name="timetable" />
+    <input type="date" [(ngModel)]="offer.timetable" name="timetable" required />
+    <div *ngIf="offerForm.submitted && !offerForm.controls['timetable']?.valid" class="error">
+      La fecha es obligatoria.
+    </div>
   </div>
 
   <div>
     <label>Address:</label>
-    <input type="text" [(ngModel)]="offer.address" name="address" />
+    <input type="text" [(ngModel)]="offer.address" name="address" required />
+    <div *ngIf="offerForm.submitted && !offerForm.controls['address']?.valid" class="error">
+      La dirección es obligatoria.
+    </div>
   </div>
 
   <div>
     <label>Tags:</label>
-    <select [(ngModel)]="offer.tags" name="tags">
+    <select [(ngModel)]="offer.tags" name="tags" required>
       <option *ngFor="let tag of tags" [value]="tag">{{ tag }}</option>
     </select>
+    <div *ngIf="offerForm.submitted && !offerForm.controls['tags']?.valid" class="error">
+      Los tags son obligatorios.
+    </div>
   </div>
 
   <div>
     <button type="submit">{{ isEditMode ? 'Actualizar' : 'Crear' }}</button>
   </div>
 </form>
+
+<style>
+  .error {
+    color: red;
+    font-size: 0.9em;
+  }
+</style>
