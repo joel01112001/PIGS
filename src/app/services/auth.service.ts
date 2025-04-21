@@ -48,4 +48,13 @@ export class AuthService {
   saveUserToLocalStorage(user: User) {
     localStorage.setItem(this.USER_KEY, JSON.stringify(user));
   }
+
+  getUserIdFromLocalStorage(): number | null {
+    const user = localStorage.getItem(this.USER_KEY);
+    if (user) {
+      const parsedUser: User = JSON.parse(user);
+      return parsedUser.id;
+    }
+    return null;
+  }
 }

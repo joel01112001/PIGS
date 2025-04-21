@@ -31,6 +31,7 @@ export class OffersService {
   }
 
   createOffer(offer: Offer): Observable<Offer> {
+    console.log(offer)
     return this.http.post<Offer>(this.apiUrl, offer);
   }
   updateOffer(offer: Offer): Observable<Offer> {

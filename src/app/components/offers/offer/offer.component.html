@@ -1,26 +1,48 @@
 <h2>{{ isEditMode ? 'Actualizar Oferta' : 'Crear Nueva Oferta' }}</h2>
 
 <form (ngSubmit)="submitForm()">
-  <label>Title:</label>
-  <input type="text" [(ngModel)]="offer.title" name="title" required />
+  <div>
+    <label>Title:</label>
+    <input type="text" [(ngModel)]="offer.title" name="title" required />
+  </div>
 
-  <label>Additional info:</label>
-  <textarea [(ngModel)]="offer.additional_info" name="additional_info"></textarea>
+  <div>
+    <label>Additional info:</label>
+    <textarea [(ngModel)]="offer.additional_info" name="additional_info"></textarea>
+  </div>
 
-  <label>Category:</label>
-  <input type="text" [(ngModel)]="offer.category" name="category" />
+  <div>
+    <label>Category:</label>
+    <select [(ngModel)]="offer.category" name="category">
+      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    </select>
+  </div>
 
-  <label>Price:</label>
-  <input type="number" [(ngModel)]="offer.price" name="price" />
+  <div>
+    <label>Price:</label>
+    <select [(ngModel)]="offer.price" name="price">
+      <option *ngFor="let price of prices" [value]="price">{{ price }}</option>
+    </select>
+  </div>
 
-  <label>Timetable:</label>
-  <input type="text" [(ngModel)]="offer.timetable" name="timetable" />
+  <div>
+    <label>Timetable:</label>
+    <input type="text" [(ngModel)]="offer.timetable" name="timetable" />
+  </div>
 
-  <label>Address:</label>
-  <input type="text" [(ngModel)]="offer.address" name="address" />
+  <div>
+    <label>Address:</label>
+    <input type="text" [(ngModel)]="offer.address" name="address" />
+  </div>
 
-  <label>Tags:</label>
-  <input type="text" [(ngModel)]="offer.tags" name="tags" />
+  <div>
+    <label>Tags:</label>
+    <select [(ngModel)]="offer.tags" name="tags">
+      <option *ngFor="let tag of tags" [value]="tag">{{ tag }}</option>
+    </select>
+  </div>
 
-  <button type="submit">{{ isEditMode ? 'Actualizar' : 'Crear' }}</button>
+  <div>
+    <button type="submit">{{ isEditMode ? 'Actualizar' : 'Crear' }}</button>
+  </div>
 </form>
