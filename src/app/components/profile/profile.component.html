@@ -1,24 +1,44 @@
 <div class="profile-container">
-<div class="profile-header">
-    <h2>My Profile</h2>
-    <button class="edit-btn">Edit Profile</button>
-</div>
-<div class="profile-info">
-    <div class="info-group">
-    <label>Name</label>
-    <p>John Doe</p>
+    <div class="profile-header">
+      <h2>My Profile</h2>
+      <button class="edit-btn" (click)="editProfile()">Edit Profile</button>
     </div>
-    <div class="info-group">
-    <label>Email</label>
-    <p>johnexample.com</p>
+  
+    <div class="profile-info">
+      <div class="info-group">
+        <label>Name</label>
+        <p>{{ user?.name }}</p>
+      </div>
+      
+      <div class="info-group">
+        <label>Email</label>
+        <p>{{ user?.email }}</p>
+      </div>
+  
+      <div class="info-group">
+        <label>Role</label>
+        <p>{{ user?.is_employer ? 'Employer' : 'Employee' }}</p>
+      </div>
+  
+      <div class="info-group">
+        <label>Profile Picture</label>
+      </div>
+  
+      <div class="info-group">
+        <label>Address</label>
+        <p>{{ user?.address }}</p>
+      </div>
+  
+      <div class="info-group">
+        <label>Phone Number</label>
+        <p>{{ user?.phone_number }}</p>
+      </div>
+  
+      <div class="info-group">
+        <label>CV</label>
+        <a [href]="user?.cv" target="_blank">View CV</a>
+      </div>
+  
     </div>
-    <div class="info-group">
-    <label>Location</label>
-    <p>New York, NY</p>
-    </div>
-    <div class="info-group">
-    <label>Member Since</label>
-    <p>January 2024</p>
-    </div>
-</div>
-</div>
+  </div>
+  

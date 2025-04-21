@@ -1,0 +1,22 @@
+<nav class="navbar">
+    <div class="nav-brand">
+      <a routerLink="/">Whileaway</a>
+    </div>
+    <div class="nav-links">
+      <a routerLink="/search" routerLinkActive="active">Search</a>
+      <a routerLink="/offers" routerLinkActive="active">My Offers</a>
+  
+      <ng-container *ngIf="user; else guestLinks">
+        <span (click)="goToProfile()">
+          {{ firstName || user?.name }}
+        </span>
+        <a href="javascript:void(0);" (click)="logout()">Logout</a>
+      </ng-container>
+  
+      <ng-template #guestLinks>
+        <a routerLink="/profile" routerLinkActive="active">Profile</a>
+        <a routerLink="/login" routerLinkActive="active">Login</a>
+      </ng-template>
+    </div>
+  </nav>
+  

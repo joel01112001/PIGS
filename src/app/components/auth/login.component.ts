@@ -10,6 +10,13 @@ interface LoginData {
   password: string;
 }
 
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  // Otros campos que puedas necesitar, como foto, teléfono, etc.
+}
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -44,8 +51,24 @@ export class LoginComponent {
       this.authService.authenticate(formData).subscribe({
         next: (response) => {
           this.isLoading = false;
+
           if (response.authenticated===1) {
             this.router.navigate(['/dashboard']);
+            // Si la autenticación es exitosa, obtenemos el ID del usuario
+            const userId = response.id;
+
+            // Llamamos a la API para obtener la información del usuario
+            this.authService.getUserInfo(userId).subscribe({
+              next: (userData) => {
+                // Ahora tenemos los datos completos del usuario
+                const localUser: User = {
+                  id: userData.id,
+                  name: userData.name,
+                  email: userData.email,
+                  // Puedes agregar más campos aquí según la respuesta del servidor
+                };
+
+                // Guardamos el usuario completo en localStorage
           } else {
             this.errorMessage = 'Incorrect email or password';
           }
