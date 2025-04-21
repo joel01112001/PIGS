@@ -69,6 +69,16 @@ export class LoginComponent {
                 };
 
                 // Guardamos el usuario completo en localStorage
+                localStorage.setItem('loggedInUser', JSON.stringify(localUser));
+
+                // También puedes usar el servicio AuthService para gestionar el usuario
+                this.authService.setUser(localUser);
+
+                // Navegar a la página de dashboard
+                this.router.navigate(['/dashboard']);
+              },
+              
+            });
           } else {
             this.errorMessage = 'Incorrect email or password';
           }
