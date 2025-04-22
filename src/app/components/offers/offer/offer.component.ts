@@ -5,6 +5,7 @@ import {NgClass, NgForOf, NgIf, NgStyle, NgSwitch, NgSwitchCase, NgFor} from "@a
 import {ActivatedRoute, Router} from "@angular/router";
 import { OffersService } from '../../../services/offers.service';
 import { AuthService } from '../../../services/auth.service';
+import { User } from '../../../services/auth.service'; // Asegúrate de importar el modelo User
 
 @Component({
   selector: 'app-offer',
@@ -28,7 +29,12 @@ export class OfferComponent implements OnInit{
   categories: string[] = [];
   tags: string[] = [];
   prices: number[] = [];
+  user = {} as User|null; // Inicializa el usuario como un objeto vacío de tipo User
+
   ngOnInit(): void {
+    this.authService.currentUser$.subscribe((user) => {
+      this.user = user; // Obtén los datos del usuario cuando estén disponibles
+    });
     this.isEditMode = this.route.snapshot.paramMap.get('mode') === 'true';
     this.offerId = Number(this.route.snapshot.paramMap.get('id'));
     if (this.isEditMode) {
@@ -45,7 +51,7 @@ export class OfferComponent implements OnInit{
     this.offersService.getPrices().subscribe((prices) => {
       this.prices = prices;
     });
-    this.offer.employer = 12;//this.authService.getUserIdFromLocalStorage(); // Asignar el ID del usuario autenticado a la oferta
+    this.offer.employer = this.user && this.user.id ? this.user.id : 0;//this.authService.getUserIdFromLocalStorage(); // Asignar el ID del usuario autenticado a la oferta
   }
   submitForm() {
     if (this.isEditMode) {

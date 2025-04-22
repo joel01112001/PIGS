@@ -4,9 +4,9 @@
     </div>
     <div class="nav-links">
       <a routerLink="/search" routerLinkActive="active">Search</a>
-      <a routerLink="/offers" routerLinkActive="active">My Offers</a>
   
       <ng-container *ngIf="user; else guestLinks">
+        <a routerLink="/offers" routerLinkActive="active">My Offers</a>
         <span (click)="goToProfile()">
           {{ firstName || user?.name }}
         </span>
@@ -14,7 +14,6 @@
       </ng-container>
   
       <ng-template #guestLinks>
-        <a routerLink="/profile" routerLinkActive="active">Profile</a>
         <a routerLink="/login" routerLinkActive="active">Login</a>
       </ng-template>
     </div>

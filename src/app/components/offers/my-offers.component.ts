@@ -4,6 +4,8 @@ import {NgClass, NgForOf, NgIf, NgStyle, NgSwitch, NgSwitchCase, NgFor} from "@a
 import {Router} from "@angular/router";
 import { Offer } from '../../interfaces/Offer';
 import { OffersService } from '../../services/offers.service';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../services/auth.service'; // Asegúrate de importar el modelo User
 
 @Component({
   selector: 'app-my-offers',
@@ -14,13 +16,17 @@ import { OffersService } from '../../services/offers.service';
 })
 export class MyOffersComponent implements OnInit{
   myOffers: Offer[] = [];
-  user = JSON.parse(localStorage.getItem('loggedInUser') || '{}').id;
-  constructor(protected offersService: OffersService, private router: Router) {}
+  user = {} as User|null; // Inicializa el usuario como un objeto vacío de tipo User
+  constructor(protected offersService: OffersService, protected authService: AuthService, private router: Router) {}
 
   
   ngOnInit(): void {
+    this.authService.currentUser$.subscribe((user) => {
+      this.user = user; // Obtén los datos del usuario cuando estén disponibles
+    });
+    const employerId = this.user && this.user.id ? this.user.id : 0;
     this.offersService.getOffers(
-      {"employer": this.user}
+      {"employer": employerId}
     ).subscribe((offers) => {this.myOffers = offers});
   }
 
